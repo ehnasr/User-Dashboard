@@ -11,6 +11,15 @@
     />
     <link rel="icon" href="./pop.ico" />
     <title>User Dashboard | Ehab Nasr</title>
+    <script>
+      (function () {
+        const THEME_KEY = "dash_theme";
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        const theme =
+          savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
