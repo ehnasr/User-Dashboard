@@ -9,8 +9,8 @@ import { useState, useEffect } from "react";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import Sidebar from "./pages/global/Sidebar.jsx";
 import Topbar from "./pages/global/Topbar.jsx";
-import Posts from "./pages/posts.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Posts from "./pages/Posts.jsx";
 import "./App.css";
 
 export default function App() {
