@@ -1,8 +1,16 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import Sidebar from "./pages/global/Sidebar.jsx";
 import Topbar from "./pages/global/Topbar.jsx";
+import Posts from "./pages/posts.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import "./App.css";
 
 export default function App() {
@@ -10,7 +18,10 @@ export default function App() {
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AppLayout />} />
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/posts" element={<Posts />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
@@ -19,7 +30,15 @@ export default function App() {
 }
 
 function AppLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    const saved = localStorage.getItem("sidebar-open");
+    return saved !== null ? JSON.parse(saved) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sidebar-open", JSON.stringify(sidebarOpen));
+  }, [sidebarOpen]);
+
   const shellClass = [
     "app-shell",
     sidebarOpen && "show-sidebar",
@@ -27,6 +46,7 @@ function AppLayout() {
   ]
     .filter(Boolean)
     .join(" ");
+
   return (
     <div className={shellClass}>
       <Sidebar />
@@ -36,10 +56,7 @@ function AppLayout() {
       />
       <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
       <main className="main">
-        <div style={{ padding: '2rem', color: 'var(--text)' }}>
-          <h1>Welcome to your Dashboard</h1>
-          <p>This is the main content area. Add your dashboard content here.</p>
-        </div>
+        <Outlet />
       </main>
     </div>
   );

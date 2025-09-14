@@ -6,10 +6,16 @@
     "sidebar topbar"
     "sidebar main";
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .main {
   grid-area: main;
+  padding: 1rem;
+  overflow: auto;
+  min-width: 0;
+  width: 100%;
 }
 
 /* sidebar */
@@ -24,22 +30,27 @@
   display: flex;
   flex-direction: column;
   z-index: 2;
+  /* position: relative; */
+}
+
+.nav {
   position: relative;
 }
 
 .nav::after {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 200px;
-  background: url(../public/decorative-plant.png);
-  background-position: bottom center;
+  width: max(20vw, 260px);
+  height: 100%;
+  background: url(../public/_freepicdownloader.com_-kids-running-through-splash-pad-normal-removebg-preview.png);
+  background-position: bottom;
   background-size: contain;
   background-repeat: no-repeat;
-  bottom: 7vh;
-  left: 0;
-  right: 0;
-  opacity: 0.3;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  filter: hue-rotate(200deg);
   z-index: -1;
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   pointer-events: none;
@@ -94,14 +105,14 @@
 
 .profile-role {
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 }
 
 .section-label {
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.15rem;
   margin: 0 1rem;
   opacity: 1;
   transform: translateX(0);
@@ -190,7 +201,7 @@
   background: var(--panel-hover);
   color: var(--text);
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   opacity: 1;
   transform: translateX(0);
@@ -201,16 +212,27 @@
 .sidebar-footer .icon {
   color: var(--primary);
 }
-
+  
 .app-shell.collapsed {
+  grid-template-columns: 5vw 1fr;
   grid-template-areas:
-    "topbar topbar"
+    "sidebar topbar"
     "sidebar main";
 }
 
 .app-shell.collapsed .sidebar {
   width: 5vw;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-shell.collapsed .main {
+  min-width: 0;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.app-shell.collapsed .topbar {
+  width: 100%;
 }
 
 .app-shell.collapsed .nav a,
@@ -226,7 +248,7 @@
 
 .app-shell.collapsed .profile-card,
 .app-shell.collapsed .section-label,
-.app-shell.collapsed span,
+.app-shell.collapsed .sidebar span,
 .app-shell.collapsed .arrow-right-icon,
 .app-shell.collapsed .sidebar-footer {
   display: none;
@@ -284,6 +306,95 @@
   border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   color: var(--text);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+/* Dashboard responsive grids */
+.grid.kpi {
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+}
+.grid.main-split {
+  grid-template-columns: 2fr 1fr;
+}
+.grid.widgets-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.table {
+  width: 100%;
+  border: 1px solid var(--border);
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+}
+
+.table th {
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  background: var(--panel-hover);
+}
+
+.table tr:hover {
+  background: var(--panel-hover);
+  transition: all 0.3s ease;
+}
+
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.toolbar .left,
+.toolbar .right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--panel-hover);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  gap: 6px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 /* limit interactivity */
@@ -355,9 +466,29 @@
   .sidebar .profile-card {
     margin-bottom: 1rem;
   }
+
+  .grid.kpi {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+
+  .grid.main-split {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.widgets-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
+  .grid.kpi {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.widgets-3 {
+    grid-template-columns: 1fr;
+  }
+
   .topbar {
     padding: 0 1rem;
   }

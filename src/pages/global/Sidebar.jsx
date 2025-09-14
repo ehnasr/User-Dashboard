@@ -58,7 +58,7 @@ export default function Sidebar() {
         </NavLink>
       </nav>
       <div className="sidebar-footer">
-        <ClockIcon className="clock-icon icon" />
+        <ClockIcon className="clock-icon icon" color={"var(--panel)"} />
         <Time />
       </div>
     </aside>
