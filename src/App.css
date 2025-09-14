@@ -21,7 +21,6 @@
   height: 100vh;
   max-height: 100vh;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -31,20 +30,23 @@
 .nav::after {
   content: "";
   position: absolute;
-  bottom: 0;
   width: 100%;
-  height: 100%;
-  background: url(../public/_freepicdownloader.com_-eid-al-adha-2024-greeting-card-design-normal-removebg-preview.png);
-  background-position: bottom;
+  height: 200px;
+  background: url(../public/decorative-plant.png);
+  background-position: bottom center;
   background-size: contain;
   background-repeat: no-repeat;
-  filter: hue-rotate(200deg);
-  opacity: 0.75;
+  bottom: 7vh;
+  left: 0;
+  right: 0;
+  opacity: 0.3;
   z-index: -1;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
 }
 
 .app-shell.collapsed .nav::after {
-  background: none;
+  opacity: 0;
 }
 
 .profile-card {
@@ -55,14 +57,11 @@
   padding: 1rem;
   border-bottom: 1px solid var(--border);
   background: var(--panel-hover);
-  margin-bottom: 1rem;
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: -0.5px;
   color: var(--text);
-  overflow: hidden;
   opacity: 1;
-  transform: translateX(0);
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -119,12 +118,11 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin: 0 0.5rem 1rem 0;
+  padding: 1rem 0;
   overflow-y: auto;
   overflow-x: hidden;
   flex: 1 1 auto;
   min-height: 0;
-  padding-bottom: 1rem;
 }
 
 .sidebar .nav a {
@@ -204,12 +202,17 @@
   color: var(--primary);
 }
 
+.app-shell.collapsed {
+  grid-template-areas:
+    "topbar topbar"
+    "sidebar main";
+}
+
 .app-shell.collapsed .sidebar {
   width: 5vw;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.app-shell.collapsed .nav,
 .app-shell.collapsed .nav a,
 .app-shell.collapsed .nav a .icon {
   padding: 0;
@@ -219,14 +222,6 @@
 
 .app-shell.collapsed .nav a {
   margin-block: 0.5rem;
-}
-
-.app-shell.collapsed .nav a:first-of-type {
-  margin-top: 1rem;
-}
-
-.app-shell.collapsed .nav a:last-of-type {
-  margin-bottom: 1rem;
 }
 
 .app-shell.collapsed .profile-card,
@@ -265,15 +260,15 @@
 
 .topbar {
   grid-area: topbar;
+  height: 10vh;
   background: var(--panel);
-  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0 1.5rem;
+  padding: 1rem;
 }
 
 .topbar .left,
@@ -316,16 +311,22 @@
     grid-template-areas: "topbar" "main";
   }
 
-  .sidebar {
+  .topbar {
+    height: 60px;
+  }
+
+  .app-shell.collapsed .sidebar {
     position: fixed;
     inset: 60px 0 0 0;
     width: 260px;
     transform: translateX(-100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
   }
 
   .app-shell.show-sidebar .sidebar {
+    position: fixed;
+    inset: 60px 0 0 0;
     transform: translateX(0);
   }
 

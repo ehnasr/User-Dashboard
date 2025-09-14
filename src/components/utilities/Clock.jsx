@@ -25,5 +25,5 @@ export default function Time() {
     return () => clearInterval(interval);
   }, []);
 
-  return <>{time}</>;
+  return <p>{time}</p>;
 }

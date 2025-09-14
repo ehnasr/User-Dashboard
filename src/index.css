@@ -64,7 +64,7 @@ body,
 
 body {
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
   color: var(--text);
   background: radial-gradient(
       ellipse at top left,
@@ -79,6 +79,7 @@ body {
     linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
   line-height: 1.6;
   position: relative;
+  overflow: hidden;
 }
 
 *::selection {
@@ -107,7 +108,10 @@ button {
   cursor: pointer;
   font-weight: 500;
   font-size: 0.75rem;
-  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -163,7 +167,9 @@ textarea {
   border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   font-size: 0.75rem;
-  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 input:focus,

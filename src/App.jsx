@@ -35,6 +35,12 @@ function AppLayout() {
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
       />
       <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
+      <main className="main">
+        <div style={{ padding: '2rem', color: 'var(--text)' }}>
+          <h1>Welcome to your Dashboard</h1>
+          <p>This is the main content area. Add your dashboard content here.</p>
+        </div>
+      </main>
     </div>
   );
 }
