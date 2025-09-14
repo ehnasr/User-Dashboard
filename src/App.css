@@ -20,12 +20,31 @@
   width: 20vw;
   height: 100vh;
   max-height: 100vh;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
   display: flex;
   flex-direction: column;
   z-index: 2;
-  will-change: width;
+  position: relative;
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../public/_freepicdownloader.com_-eid-al-adha-2024-greeting-card-design-normal-removebg-preview.png);
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: hue-rotate(200deg);
+  opacity: 0.75;
+  z-index: -1;
+}
+
+.app-shell.collapsed .nav::after {
+  background: none;
 }
 
 .profile-card {
@@ -187,9 +206,7 @@
 
 .app-shell.collapsed .sidebar {
   width: 5vw;
-  padding: 1rem 0.5rem;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-shell.collapsed .nav,
@@ -197,8 +214,19 @@
 .app-shell.collapsed .nav a .icon {
   padding: 0;
   margin: 0;
-  transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none;
+}
+
+.app-shell.collapsed .nav a {
+  margin-block: 0.5rem;
+}
+
+.app-shell.collapsed .nav a:first-of-type {
+  margin-top: 1rem;
+}
+
+.app-shell.collapsed .nav a:last-of-type {
+  margin-bottom: 1rem;
 }
 
 .app-shell.collapsed .profile-card,
