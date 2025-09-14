@@ -1,36 +1,40 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
+import { useState } from "react";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
+import Sidebar from "./pages/global/Sidebar.jsx";
+import Topbar from "./pages/global/Topbar.jsx";
 import "./App.css";
 
 export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <div className="app">
-          <header className="app-header">
-            <h1>Dashboard</h1>
-          </header>
-          <ToggleTheme />
-          <main className="main">
-            <Routes>
-              <Route path="/" element={<div>Welcome to Dashboard</div>} />
-              <Route path="/about" element={<div>About Page</div>} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </main>
-        </div>
+        <Routes>
+          <Route path="/" element={<AppLayout />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
 }
 
-function ToggleTheme() {
-  const { theme, toggle } = useTheme();
+function AppLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const shellClass = [
+    "app-shell",
+    sidebarOpen && "show-sidebar",
+    !sidebarOpen && "collapsed",
+  ]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <button className="ghost" onClick={toggle}>
-      <span style={{ fontSize: "12px" }}>
-        {theme === "dark" ? "Light" : "Dark"}
-      </span>
-    </button>
+    <div className={shellClass}>
+      <Sidebar />
+      <Topbar
+        sidebar={shellClass}
+        onToggleSidebar={() => setSidebarOpen((v) => !v)}
+      />
+      <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
+    </div>
   );
 }
