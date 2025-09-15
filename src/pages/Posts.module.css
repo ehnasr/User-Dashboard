@@ -1,12 +1,12 @@
 .highlight {
   background: var(--accent);
-  color: white;
+  color: var(--panel);
   padding: 1px;
-  font-weight: 500;
 }
 
+.titleCell,
 .bodyCell {
-  max-width: 300px;
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -14,6 +14,7 @@
 
 .actionsContainer {
   display: flex;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -37,7 +38,7 @@
 .badge {
   background: var(--primary);
   color: var(--panel);
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.7rem;
   font-weight: 500;
 }
@@ -114,10 +115,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 24px;
-  padding: 16px 20px;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
   background: var(--panel);
-  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
 }
 
@@ -129,7 +129,7 @@
 
 .paginationText {
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 0.825rem;
 }
 
 .goToContainer {
@@ -140,17 +140,16 @@
 
 .goToLabel {
   color: var(--text-muted);
-  font-size: 12px;
+  font-size: 0.825rem;
 }
 
 .goToInput {
   width: 60px;
-  padding: 4px 8px;
-  font-size: 12px;
+  padding: 4px 0;
+  font-size: 0.7rem;
   text-align: center;
   background: var(--panel-hover);
   border: 1px solid var(--border);
-  border-radius: 4px;
   color: var(--text);
 }
 
@@ -161,13 +160,13 @@
 }
 
 .paginationButton {
-  padding: 6px 8px;
-  font-size: 12px;
+  padding: 4px;
+  font-size: 0.825rem;
 }
 
 .paginationButton.primary {
   background: var(--primary);
-  color: white;
+  color: var(--panel);
 }
 
 .paginationButton.ghost {
@@ -191,7 +190,7 @@
 }
 
 .ellipsis {
-  padding: 6px 4px;
+  padding: 4px;
   color: var(--text-muted);
 }
 
@@ -210,7 +209,7 @@
 .formField label {
   color: var(--text);
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.7rem;
 }
 
 .formField textarea {
@@ -219,7 +218,7 @@
   border: 1px solid var(--border);
   color: var(--text);
   font-family: inherit;
-  font-size: 14px;
+  font-size: 0.825rem;
   resize: vertical;
   min-height: 120px;
 }
@@ -230,9 +229,33 @@
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
+.tableContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.tableContainer::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tableContainer::-webkit-scrollbar-track {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.tableContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
 /* Responsive Design */
 
-/* Tablet styles */
 @media (max-width: 768px) {
   .toolbar {
     flex-direction: column;
@@ -261,23 +284,14 @@
     flex-wrap: wrap;
   }
 
-  .pageNumbers {
-    justify-content: center;
-  }
-
-  .bodyCell {
-    max-width: 200px;
-  }
-
   .formField {
     padding: 0.25rem 0.5rem;
   }
 }
 
-/* Mobile styles */
 @media (max-width: 480px) {
   .toolbar {
-    padding: 0.75rem;
+    padding: 0.5rem;
     margin-bottom: 0.75rem;
   }
 
@@ -320,16 +334,24 @@
     gap: 1px;
   }
 
+  .titleCell {
+    max-width: 120px;
+    font-size: 12px;
+  }
+
   .bodyCell {
-    max-width: 150px;
+    max-width: 120px;
+    font-size: 12px;
   }
 
   .actionsContainer {
-    gap: 4px;
+    gap: 2px;
+    flex-direction: column;
   }
 
   .actionsContainer button {
-    padding: 4px;
+    padding: 2px;
+    font-size: 10px;
   }
 
   .formField {
@@ -353,58 +375,5 @@
   .skeletonItem:nth-child(4) {
     height: 10px;
     margin-bottom: 6px;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1200px) {
-  .toolbar {
-    padding: 1.5rem 2rem;
-  }
-
-  .pagination {
-    padding: 1.5rem 2rem;
-  }
-
-  .bodyCell {
-    max-width: 400px;
-  }
-
-  .formField {
-    padding: 0.75rem 1.5rem;
-  }
-
-  .formField textarea {
-    padding: 0.75rem 1rem;
-    min-height: 140px;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 320px) {
-  .toolbar {
-    padding: 0.5rem;
-  }
-
-  .pagination {
-    padding: 0.5rem;
-  }
-
-  .paginationControls {
-    gap: 2px;
-  }
-
-  .paginationButton {
-    padding: 3px 4px;
-    font-size: 10px;
-  }
-
-  .bodyCell {
-    max-width: 120px;
-  }
-
-  .badge {
-    padding: 0.2rem 0.4rem;
-    font-size: 0.55rem;
   }
 }

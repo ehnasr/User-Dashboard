@@ -6,8 +6,13 @@
     "sidebar topbar"
     "sidebar main";
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
+  width: 100dvw;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .main {
@@ -16,6 +21,7 @@
   overflow: auto;
   min-width: 0;
   width: 100%;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 0);
 }
 
 /* sidebar */
@@ -25,39 +31,13 @@
   border-right: 1px solid var(--border);
   width: 20vw;
   height: 100vh;
+  height: 100dvh;
   max-height: 100vh;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 100dvh;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   z-index: 2;
-  /* position: relative; */
-}
-
-.nav {
-  position: relative;
-}
-
-.nav::after {
-  content: "";
-  position: absolute;
-  width: max(20vw, 260px);
-  height: 100%;
-  background: url(../public/_freepicdownloader.com_-kids-running-through-splash-pad-normal-removebg-preview.png);
-  background-position: bottom;
-  background-size: contain;
-  background-repeat: no-repeat;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.5;
-  filter: hue-rotate(200deg);
-  z-index: -1;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  pointer-events: none;
-}
-
-.app-shell.collapsed .nav::after {
-  opacity: 0;
 }
 
 .profile-card {
@@ -73,8 +53,6 @@
   letter-spacing: -0.5px;
   color: var(--text);
   opacity: 1;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .profile-card .avatar {
@@ -134,6 +112,26 @@
   overflow-x: hidden;
   flex: 1 1 auto;
   min-height: 0;
+  position: relative;
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  width: max(20vw, 260px);
+  height: 100%;
+  background: url(../public/decorative-plant.png);
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  filter: hue-rotate(200deg);
+  z-index: -1;
+  transition: opacity 1s ease-in;
+  pointer-events: none;
 }
 
 .sidebar .nav a {
@@ -142,10 +140,7 @@
   color: var(--text-secondary);
   border: 1px solid transparent;
   font-weight: 500;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
 }
@@ -176,8 +171,7 @@
   width: 1rem;
   margin-right: 1rem;
   opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar .nav a:hover .arrow-right-icon,
@@ -204,15 +198,13 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 1s ease-in;
 }
 
 .sidebar-footer .icon {
   color: var(--primary);
 }
-  
+
 .app-shell.collapsed {
   grid-template-columns: 5vw 1fr;
   grid-template-areas:
@@ -231,10 +223,6 @@
   width: 100%;
 }
 
-.app-shell.collapsed .topbar {
-  width: 100%;
-}
-
 .app-shell.collapsed .nav a,
 .app-shell.collapsed .nav a .icon {
   padding: 0;
@@ -246,11 +234,10 @@
   margin-block: 0.5rem;
 }
 
-.app-shell.collapsed .profile-card,
+.app-shell.collapsed .profile-meta,
 .app-shell.collapsed .section-label,
 .app-shell.collapsed .sidebar span,
-.app-shell.collapsed .arrow-right-icon,
-.app-shell.collapsed .sidebar-footer {
+.app-shell.collapsed .arrow-right-icon {
   display: none;
 }
 
@@ -262,6 +249,7 @@
 .app-shell.collapsed .sidebar .nav a .icon {
   width: 1.5rem;
   height: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-shell.collapsed .sidebar .nav a.active,
@@ -270,7 +258,6 @@
   background: none;
   color: var(--text);
   transform: translateX(0.5rem);
-  position: relative;
 }
 
 .app-shell.collapsed .sidebar .nav a.active {
@@ -278,19 +265,37 @@
   color: var(--primary);
 }
 
+.app-shell.collapsed .nav::after,
+.app-shell.collapsed .sidebar-footer {
+  opacity: 0;
+  transition: opacity 0s;
+}
+
+.app-shell.collapsed .profile-card {
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.app-shell.collapsed .avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 /* topbar */
 
 .topbar {
   grid-area: topbar;
   height: 10vh;
+  height: 10dvh;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 1rem;
+  width: 100%;
+  z-index: 1;
 }
 
 .topbar .left,
@@ -301,32 +306,11 @@
 }
 
 .topbar .top-search {
-  width: clamp(160px, 40vw, 360px);
+  width: clamp(160px, 40vw, 300px);
   background: var(--panel-hover);
   border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   color: var(--text);
-}
-
-.grid {
-  display: grid;
-  gap: 16px;
-}
-.grid.cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-.grid.cols-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-/* Dashboard responsive grids */
-.grid.kpi {
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-}
-.grid.main-split {
-  grid-template-columns: 2fr 1fr;
-}
-.grid.widgets-3 {
-  grid-template-columns: repeat(3, 1fr);
 }
 
 .table {
@@ -352,49 +336,7 @@
 
 .table tr:hover {
   background: var(--panel-hover);
-  transition: all 0.3s ease;
-}
-
-.toolbar {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background: var(--panel);
-  border: 1px solid var(--border);
-}
-
-.toolbar .left,
-.toolbar .right {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: var(--panel-hover);
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem 0;
-  gap: 6px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* limit interactivity */
@@ -420,24 +362,48 @@
     grid-template-columns: 1fr;
     grid-template-rows: 60px 1fr;
     grid-template-areas: "topbar" "main";
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    width: 100dvw;
   }
 
   .topbar {
     height: 60px;
+    width: 100%;
+  }
+
+  .app-shell.collapsed {
+    grid-template-columns: 1fr;
+    grid-template-areas: "topbar" "main";
+  }
+
+  .app-shell.collapsed .topbar {
+    width: 100%;
+    grid-column: 1;
+  }
+
+  .app-shell.collapsed .main {
+    width: 100%;
+    grid-column: 1;
   }
 
   .app-shell.collapsed .sidebar {
     position: fixed;
     inset: 60px 0 0 0;
-    width: 260px;
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .app-shell.show-sidebar .sidebar {
     position: fixed;
     inset: 60px 0 0 0;
+    width: 50vw;
+    width: 50dvw;
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     transform: translateX(0);
   }
 
@@ -445,12 +411,14 @@
     content: "";
     position: fixed;
     inset: 60px 0 0 0;
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     background: rgba(2, 6, 23, 0.5);
     backdrop-filter: blur(2px);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: opacity;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
   }
 
   .app-shell.show-sidebar .sidebar-backdrop {
@@ -466,42 +434,16 @@
   .sidebar .profile-card {
     margin-bottom: 1rem;
   }
-
-  .grid.kpi {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-  }
-
-  .grid.main-split {
-    grid-template-columns: 1fr;
-  }
-
-  .grid.widgets-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
-@media (max-width: 600px) {
-  .grid.kpi {
-    grid-template-columns: 1fr;
-  }
-
-  .grid.widgets-3 {
-    grid-template-columns: 1fr;
-  }
-
-  .topbar {
-    padding: 0 1rem;
-  }
-
-  .topbar .top-search {
-    width: 100%;
-  }
-
+@media (max-width: 480px) {
+  .topbar,
   .main {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
-  .sidebar {
-    width: min(86vw, 300px);
+  .app-shell.show-sidebar .sidebar {
+    width: 80vw;
+    width: 80dvw;
   }
 }

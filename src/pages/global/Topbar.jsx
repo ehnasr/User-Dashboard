@@ -1,8 +1,8 @@
 import { useTheme } from "../../context/ThemeContext.jsx";
-import "../../App.css";
 import SidebarIcon from "../../components/icons/SidebarIcon.jsx";
 import MoonIcon from "../../components/icons/MoonIcon.jsx";
 import SunIcon from "../../components/icons/SunIcon.jsx";
+import "../../App.css";
 
 export default function Topbar({ onToggleSidebar, sidebar }) {
   const { theme, toggle } = useTheme();

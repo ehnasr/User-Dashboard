@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import Time from "../../components/utilities/Clock.jsx";
-import "../../App.css";
+import Time from "../../components/utilities/Time.jsx";
 import ArrowRightIcon from "../../components/icons/ArrowRightIcon.jsx";
 import ClockIcon from "../../components/icons/ClockIcon.jsx";
 import HomeIcon from "../../components/icons/HomeIcon.jsx";
 import NoteIcon from "../../components/icons/NoteIcon.jsx";
 import InfoIcon from "../../components/icons/InfoIcon.jsx";
+import "../../App.css";
 
 export default function Sidebar() {
   return (

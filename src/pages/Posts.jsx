@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import Button from "../components/UI/Button.jsx";
+import { usePosts } from "../hooks/usePosts.js";
+import { api } from "../services/api.js";
 import Input from "../components/UI/Input.jsx";
 import Table from "../components/UI/Table.jsx";
 import Modal from "../components/UI/Modal.jsx";
 import EditPostIcon from "../components/icons/EditPostIcon.jsx";
 import DeletePostIcon from "../components/icons/DeletePostIcon.jsx";
 import PlusIcon from "../components/icons/PlusIcon.jsx";
-import { usePosts } from "../hooks/usePosts.js";
-import { api } from "../services/api.js";
 import styles from "./Posts.module.css";
 
 export default function Posts() {
@@ -50,7 +50,11 @@ export default function Posts() {
       {
         header: "Title",
         accessor: "title",
-        render: (row) => highlightText(row.title, query),
+        render: (row) => (
+          <div className={styles.titleCell}>
+            {highlightText(row.title, query)}
+          </div>
+        ),
       },
       {
         header: "Body",
@@ -178,7 +182,9 @@ export default function Posts() {
         </div>
       ) : (
         <div className={styles.slideUp}>
-          <Table columns={columns} data={items} />
+          <div className={styles.tableContainer}>
+            <Table columns={columns} data={items} />
+          </div>
         </div>
       )}
 
@@ -212,7 +218,6 @@ export default function Posts() {
             onClick={() => setPage(1)}
             disabled={page === 1}
             className="ghost"
-            style={{ padding: "6px 8px", fontSize: "12px" }}
           >
             First
           </Button>
@@ -220,7 +225,6 @@ export default function Posts() {
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
             className="ghost"
-            style={{ padding: "6px 8px", fontSize: "12px" }}
           >
             ‹
           </Button>
@@ -239,12 +243,7 @@ export default function Posts() {
 
               if (start > 1) {
                 pages.push(
-                  <Button
-                    key={1}
-                    onClick={() => setPage(1)}
-                    className="ghost"
-                    style={{ padding: "6px 8px", fontSize: "12px" }}
-                  >
+                  <Button key={1} onClick={() => setPage(1)} className="ghost">
                     1
                   </Button>
                 );
@@ -263,11 +262,6 @@ export default function Posts() {
                     key={i}
                     onClick={() => setPage(i)}
                     className={i === page ? "primary" : "ghost"}
-                    style={{
-                      padding: "6px 8px",
-                      fontSize: "12px",
-                      minWidth: "32px",
-                    }}
                   >
                     {i}
                   </Button>
@@ -287,7 +281,6 @@ export default function Posts() {
                     key={totalPages}
                     onClick={() => setPage(totalPages)}
                     className="ghost"
-                    style={{ padding: "6px 8px", fontSize: "12px" }}
                   >
                     {totalPages}
                   </Button>
@@ -302,7 +295,6 @@ export default function Posts() {
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
             className="ghost"
-            style={{ padding: "6px 8px", fontSize: "12px" }}
           >
             ›
           </Button>
@@ -310,7 +302,6 @@ export default function Posts() {
             onClick={() => setPage(totalPages)}
             disabled={page === totalPages}
             className="ghost"
-            style={{ padding: "6px 8px", fontSize: "12px" }}
           >
             Last
           </Button>
