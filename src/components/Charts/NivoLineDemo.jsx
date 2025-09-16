@@ -6,7 +6,7 @@ const data = [
     color: "var(--primary)",
     data: Array.from({ length: 12 }).map((_, i) => ({
       x: `${i + 1}`,
-      y: Math.round(50 + Math.random() * 50),
+      y: Math.round(20 + Math.random() * 80),
     })),
   },
 ];
@@ -16,9 +16,9 @@ export default function NivoLineDemo() {
     <div style={{ height: "80%" }}>
       <ResponsiveLine
         data={data}
-        margin={{ top: 10, right: 10, bottom: 30, left: 30 }}
+        margin={{ top: 20, right: 10, bottom: 30, left: 30 }}
         xScale={{ type: "point" }}
-        yScale={{ type: "linear", min: "auto", max: "auto", stacked: false }}
+        yScale={{ type: "linear", min: 0, max: 100, stacked: false }}
         curve="monotoneX"
         axisBottom={{ tickSize: 0, tickPadding: 6 }}
         axisLeft={{ tickSize: 0, tickPadding: 6 }}

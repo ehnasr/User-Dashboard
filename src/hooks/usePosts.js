@@ -118,6 +118,12 @@ export function usePosts({ query, page, pageSize }) {
     }
   }, []);
 
+  const getRecentPosts = useCallback((limit = 7) => {
+    return data
+      .sort((a, b) => b.id - a.id)
+      .slice(0, limit);
+  }, [data]);
+
   return {
     items,
     total,
@@ -127,6 +133,7 @@ export function usePosts({ query, page, pageSize }) {
     updatePost,
     removePost,
     refetch,
-    allData: data, 
+    allData: data,
+    getRecentPosts,
   };
 }

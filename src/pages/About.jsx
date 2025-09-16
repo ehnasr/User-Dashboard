@@ -42,6 +42,9 @@ export default function PageAbout() {
           <div className={styles.card}>
             <strong>JSONPlaceholder</strong> - Mock API
           </div>
+          <div className={styles.card}>
+            <strong>Nivo</strong> - Data visualization library
+          </div>
         </div>
         <div className={styles.rowFlex}>
           <StarShineIcon

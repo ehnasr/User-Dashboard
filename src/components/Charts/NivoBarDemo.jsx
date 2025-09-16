@@ -12,11 +12,11 @@ export default function NivoBarDemo() {
         data={data}
         keys={["sales"]}
         indexBy="label"
-        margin={{ top: 10, right: 30, bottom: 30, left: 30 }}
+        margin={{ top: 20, right: 10, bottom: 40, left: 30 }}
         padding={0.5}
         colors={["var(--primary)"]}
         axisBottom={{ tickSize: 0, tickPadding: 6 }}
-        axisLeft={{ tickSize: 0, tickPadding: 4 }}
+        axisLeft={{ tickSize: 0, tickPadding: 6 }}
         enableGridX={true}
         theme={{
           background: "transparent",

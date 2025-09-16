@@ -9,14 +9,15 @@ const data = [
 
 export default function NivoPieDemo() {
   return (
-    <div style={{ height: "80%", display: "flex", alignItems: "center" }}>
+    <div style={{ height: "75%" }}>
       <ResponsivePie
         data={data}
-        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+        padding={0.5}
         innerRadius={0.5}
-        padAngle={1}
-        cornerRadius={3}
-        activeOuterRadiusOffset={6}
+        padAngle={3}
+        cornerRadius={5}
+        activeOuterRadiusOffset={5}
         colors={["#60a5fa", "#34d399", "#f59e0b", "#f87171"]}
         theme={{
           background: "transparent",
@@ -26,7 +27,7 @@ export default function NivoPieDemo() {
           },
           labels: { text: { fill: "var(--text)" } },
         }}
-        enableArcLabels={false}
+        enableArcLabels={true}
         legends={[]}
       />
     </div>

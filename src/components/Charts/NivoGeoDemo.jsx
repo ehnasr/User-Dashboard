@@ -1,31 +1,47 @@
 import { ResponsiveChoropleth } from "@nivo/geo";
-import worldFeatures from "./world_countries.js";
+import geoFeatures from "./world_countries.js";
 
-const data = worldFeatures.features.slice(0, 20).map((f) => ({
-  id: f.id || f.properties.iso_a3,
+const data = geoFeatures.features.map((f, index) => ({
+  id: f.id || f.properties.name,
   value: Math.round(Math.random() * 1000),
 }));
 
 export default function NivoGeoDemo() {
   return (
-    <div style={{ height: 200 }}>
+    <div style={{ width: "100%", height: 220 }}>
       <ResponsiveChoropleth
         data={data}
-        features={worldFeatures.features}
-        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+        features={geoFeatures.features}
+        margin={{ top: 30, right: 10, bottom: 10, left: 10 }}
         colors="nivo"
         domain={[0, 1000]}
-        unknownColor="#222"
         label="properties.name"
         valueFormat="," 
-        projectionTranslation={[0.5, 0.55]}
-        projectionScale={90}
+        tooltip={({ feature, value }) => (
+          <div style={{ padding: 6 }}>
+            <div style={{ fontWeight: 700 }}>{feature?.properties?.name}</div>
+            {typeof value === "number" ? (
+              <div>Value: {value.toLocaleString()}</div>
+            ) : null}
+          </div>
+        )}
+        projectionScale={50}
         borderWidth={0.5}
         borderColor="var(--border)"
-        theme={{ textColor: "var(--text)", background: "transparent" }}
+        theme={{
+          textColor: "var(--text)",
+          background: "transparent",
+          tooltip: {
+            container: {
+              background: "var(--panel, #111827)",
+              color: "var(--text)",
+              fontSize: 12,
+              borderRadius: 4,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+            },
+          },
+        }}
       />
     </div>
   );
 }
-
-
