@@ -16,15 +16,6 @@
   transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.main {
-  grid-area: main;
-  padding: 1rem;
-  overflow: auto;
-  min-width: 0;
-  width: 100%;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* sidebar */
 
 .sidebar {
@@ -320,6 +311,98 @@
   color: var(--text);
 }
 
+/* main */
+
+.main {
+  grid-area: main;
+  padding: 1rem;
+  overflow: auto;
+  min-width: 0;
+  width: 100%;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid.kpi {
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+}
+
+.grid.main-split {
+  grid-template-columns: 2fr 1fr;
+}
+
+.grid.widgets-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.table {
+  width: 100%;
+  border: 1px solid var(--border);
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+}
+
+.table th {
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  background: var(--panel-hover);
+}
+
+.table tr:hover {
+  background: var(--panel-hover);
+  transition: all 0.3s ease-in-out;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  animation: fade-in 0.3s ease both;
+}
+
+.grid .panel:hover {
+  background: var(--panel-hover);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--panel-hover) 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* limit interactivity */
 
 .sidebar .avatar,
@@ -388,6 +471,10 @@
     transform: translateX(0);
   }
 
+  .app-shell.collapsed .profile-card {
+    display: none;
+  }
+
   .sidebar-backdrop {
     content: "";
     position: fixed;
@@ -415,6 +502,18 @@
   .sidebar .profile-card {
     margin-bottom: 1rem;
   }
+
+  .grid.kpi {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+
+  .grid.main-split {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.widgets-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 480px) {
@@ -432,5 +531,13 @@
   .app-shell.show-sidebar .sidebar {
     width: 80vw;
     width: 80dvw;
+  }
+
+  .grid.kpi {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.widgets-3 {
+    grid-template-columns: 1fr;
   }
 }

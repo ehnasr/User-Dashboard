@@ -1,0 +1,105 @@
+.sectionHeader {
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+.panelPadding {
+  padding: 1rem;
+}
+
+.kpiHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpiLabel {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.badgePrimaryOutline {
+  color: var(--primary);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: transparent;
+  padding: 0.25rem 0.5rem;
+}
+
+.kpiValue {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.section {
+  margin-top: 1rem;
+}
+
+.panelTall {
+  height: 320px;
+  padding: 1rem;
+}
+
+.revenueValue {
+  color: var(--success);
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.skeletonLg {
+  height: 220px;
+  margin-top: 0.5rem;
+}
+
+.panelTallScroll {
+  height: 320px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.txList {
+  display: grid;
+  gap: 4px;
+  margin-top: 0.5rem;
+}
+
+.txItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: var(--panel-elevated);
+  border: 1px solid var(--border);
+}
+
+.txId {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.txDate {
+  color: var(--text-muted);
+  font-size: 0.825rem;
+}
+
+.badgeSuccessOutline {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 0.25rem 0.5rem;
+  color: var(--success);
+}
+
+.panelMedium {
+  height: 280px;
+  padding: 1rem;
+}
+
+.skeletonMd {
+  height: 200px;
+  margin-top: 0.5rem;
+}
+
