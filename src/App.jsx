@@ -10,7 +10,8 @@ import { ThemeProvider } from "./context/ThemeContext.jsx";
 import Sidebar from "./pages/global/Sidebar.jsx";
 import Topbar from "./pages/global/Topbar.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import Posts from "./pages/Post.jsx";
+import Posts from "./pages/Posts.jsx";
+import About from "./pages/About.jsx";
 import "./App.css";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Route element={<AppLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/posts" element={<Posts />} />
+            <Route path="/about" element={<About />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

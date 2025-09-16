@@ -1,0 +1,48 @@
+.panelPadding {
+  padding: 1rem;
+}
+
+.titleMargin {
+  margin-bottom: 1rem;
+}
+
+.gridGap {
+  display: grid;
+  gap: 16px;
+}
+
+.rowFlex {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.h3Title {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.paragraph {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  padding: 0.5rem;
+  background: var(--panel-hover);
+  border: 1px solid var(--border);
+}
+
+.list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
