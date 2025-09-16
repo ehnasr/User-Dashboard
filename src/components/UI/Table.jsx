@@ -1,3 +1,5 @@
+import styles from "./Table.module.css";
+
 export default function Table({
   columns,
   data,
@@ -5,8 +7,8 @@ export default function Table({
   empty = "No data",
 }) {
   return (
-    <div className="panel" style={{ overflow: "hidden" }}>
-      <div style={{ overflow: "auto" }}>
+    <div className={`panel ${styles.tableContainer}`}>
+      <div className={styles.tableWrapper}>
         <table className="table">
           <thead>
             <tr>
@@ -20,11 +22,7 @@ export default function Table({
               <tr>
                 <td
                   colSpan={columns.length}
-                  style={{
-                    textAlign: "center",
-                    padding: 20,
-                    color: "var(--muted)",
-                  }}
+                  className={styles.emptyCell}
                 >
                   {empty}
                 </td>

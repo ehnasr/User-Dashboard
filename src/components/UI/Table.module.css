@@ -1,0 +1,13 @@
+.tableContainer {
+  overflow: hidden;
+}
+
+.tableWrapper {
+  overflow: auto;
+}
+
+.emptyCell {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+}

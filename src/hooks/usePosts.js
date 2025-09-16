@@ -43,7 +43,7 @@ export function usePosts({ query, page, pageSize }) {
   const items = filtered.slice(start, start + pageSize);
 
   const addPost = useCallback((post) => {
-    setData((arr) => [post, ...arr]);
+    setData((arr) => [...arr, post]);
   }, []);
 
   const updatePost = useCallback((id, patch) => {
@@ -76,5 +76,6 @@ export function usePosts({ query, page, pageSize }) {
     updatePost,
     removePost,
     refetch,
+    allData: data, 
   };
 }

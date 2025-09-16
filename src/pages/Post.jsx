@@ -16,8 +16,10 @@ export default function Posts() {
   const [pageSize, setPageSize] = useState(10);
   const [editing, setEditing] = useState(undefined);
   const [form, setForm] = useState({ title: "", body: "" });
-  const { items, total, loading, error, addPost, updatePost, removePost } =
+  const { items, total, loading, error, addPost, updatePost, removePost, allData } =
     usePosts({ query, page, pageSize });
+
+  const nextLocalId = allData.length > 0 ? Math.max(...allData.map(item => item.id)) + 1 : 1;
 
   // Mock notification function
   const push = (notification) => {
@@ -46,23 +48,29 @@ export default function Posts() {
 
   const columns = useMemo(
     () => [
-      { header: "ID", accessor: "id" },
+      { header: "ID", accessor: "id",
+        render: (row) => (
+          <p className={styles.idCell} title={row.id}>
+            {row.id}
+          </p>
+        ),
+       },
       {
         header: "Title",
         accessor: "title",
         render: (row) => (
-          <div className={styles.titleCell}>
+          <p className={styles.titleCell} title={row.title}>
             {highlightText(row.title, query)}
-          </div>
+          </p>
         ),
       },
       {
         header: "Body",
         accessor: "body",
         render: (row) => (
-          <div className={styles.bodyCell}>
+          <p className={styles.bodyCell} title={row.body}>
             {highlightText(row.body, query)}
-          </div>
+          </p>
         ),
       },
       {
@@ -78,7 +86,7 @@ export default function Posts() {
               <EditPostIcon />
             </button>
             <button
-              className="ghost"
+              className="danger"
               onClick={() => onDelete(row)}
               aria-label="Delete"
             >
@@ -98,9 +106,17 @@ export default function Posts() {
 
   async function onDelete(row) {
     try {
-      await api.deletePost(row.id);
-      removePost(row.id);
-      push({ type: "success", message: "Deleted (mock)" });
+      // Check if this is a locally created post (has a local flag)
+      if (row.isLocal) {
+        // Delete locally created post
+        removePost(row.id);
+        push({ type: "success", message: "Deleted locally" });
+      } else {
+        // Delete API post
+        await api.deletePost(row.id);
+        removePost(row.id);
+        push({ type: "success", message: "Deleted" });
+      }
     } catch (e) {
       push({ type: "error", message: e.message });
     }
@@ -110,17 +126,22 @@ export default function Posts() {
     e.preventDefault();
     try {
       if (editing) {
-        await api.updatePost(editing.id, form);
-        updatePost(editing.id, form);
-        push({ type: "success", message: "Updated (mock)" });
+        if (editing.isLocal) {
+          updatePost(editing.id, form);
+          push({ type: "success", message: "Updated locally" });
+        } else {
+          await api.updatePost(editing.id, form);
+          updatePost(editing.id, form);
+          push({ type: "success", message: "Updated" });
+        }
       } else {
-        const created = await api.createPost(form);
         const local = {
-          id: created?.id ?? Math.floor(Math.random() * 1000000),
+          id: nextLocalId,
           ...form,
+          isLocal: true, 
         };
         addPost(local);
-        push({ type: "success", message: "Created (mock)" });
+        push({ type: "success", message: "Created locally" });
       }
       setEditing(undefined);
       setForm({ title: "", body: "" });
@@ -146,6 +167,7 @@ export default function Posts() {
           <span className={styles.badge}>{total} results</span>
         </div>
         <div className={styles.right}>
+          <span className={styles.pageSizeLabel}>Posts per page:</span>
           <select
             value={pageSize}
             onChange={(e) => {
@@ -158,11 +180,11 @@ export default function Posts() {
             <option value={20}>20</option>
           </select>
           <Button
-            variant="primary"
             onClick={() => {
               setEditing(null);
               setForm({ title: "", body: "" });
             }}
+            title="Add new post"
           >
             <PlusIcon />
           </Button>
@@ -324,12 +346,15 @@ export default function Posts() {
         }
       >
         <form id="post-form" onSubmit={onSubmit} className={styles.form}>
+          <div className={styles.formField}>
           <Input
             label="Title"
+            className={styles.formInput}
             value={form.title}
             onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
             required
           />
+          </div>
           <div className={styles.formField}>
             <label>Body</label>
             <textarea

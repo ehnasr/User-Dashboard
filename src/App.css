@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main {
@@ -21,7 +22,7 @@
   overflow: auto;
   min-width: 0;
   width: 100%;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 0);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* sidebar */
@@ -53,6 +54,7 @@
   letter-spacing: -0.5px;
   color: var(--text);
   opacity: 1;
+  position: relative;
 }
 
 .profile-card .avatar {
@@ -61,6 +63,7 @@
   border-radius: 999px;
   overflow: hidden;
   border: 2px solid var(--border);
+  transition: transform 0.3s ease;
 }
 
 .profile-card .avatar img {
@@ -74,6 +77,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  opacity: 1;
+  transition: opacity 1s ease-in;
 }
 
 .profile-name {
@@ -97,7 +102,6 @@
 }
 
 .sidebar .nav a span,
-.profile-meta,
 .section-label {
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -234,7 +238,6 @@
   margin-block: 0.5rem;
 }
 
-.app-shell.collapsed .profile-meta,
 .app-shell.collapsed .section-label,
 .app-shell.collapsed .sidebar span,
 .app-shell.collapsed .arrow-right-icon {
@@ -265,6 +268,7 @@
   color: var(--primary);
 }
 
+.app-shell.collapsed .profile-meta,
 .app-shell.collapsed .nav::after,
 .app-shell.collapsed .sidebar-footer {
   opacity: 0;
@@ -277,6 +281,9 @@
 }
 
 .app-shell.collapsed .avatar {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
   width: 1.5rem;
   height: 1.5rem;
 }
@@ -311,32 +318,6 @@
   border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   color: var(--text);
-}
-
-.table {
-  width: 100%;
-  border: 1px solid var(--border);
-}
-
-.table th,
-.table td {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border);
-}
-
-.table th {
-  color: var(--text-muted);
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  background: var(--panel-hover);
-}
-
-.table tr:hover {
-  background: var(--panel-hover);
-  transition: all 0.3s ease-in-out;
 }
 
 /* limit interactivity */
@@ -440,6 +421,12 @@
   .topbar,
   .main {
     padding: 0.5rem;
+  }
+
+  .topbar .right {
+    font-size: 0.7rem;
+    text-align: center;
+    gap: 0;
   }
 
   .app-shell.show-sidebar .sidebar {

@@ -13,6 +13,7 @@ export default function Topbar({ onToggleSidebar, sidebar }) {
           className="ghost hamburger"
           onClick={onToggleSidebar}
           aria-label="Toggle sidebar"
+          title="Toggle sidebar"
         >
           <SidebarIcon deg={sidebar.includes("collapsed") ? "0" : "180"} />
         </button>
@@ -22,7 +23,12 @@ export default function Topbar({ onToggleSidebar, sidebar }) {
         <a href="https://jsonplaceholder.typicode.com/" target="_blank">
           API Docs
         </a>
-        <button className="ghost" onClick={toggle} aria-label={theme}>
+        <button
+          className="ghost"
+          onClick={toggle}
+          aria-label={theme}
+          title={theme === "dark" ? "Light" : "Dark"}
+        >
           {theme === "dark" ? <SunIcon /> : <MoonIcon />}
         </button>
       </div>

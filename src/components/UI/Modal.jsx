@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styles from "./Modal.module.css";
 
 export default function Modal({ open, title, children, onClose, footer }) {
   useEffect(() => {
@@ -11,50 +12,17 @@ export default function Modal({ open, title, children, onClose, footer }) {
 
   if (!open) return null;
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(2,6,23,0.6)",
-        backdropFilter: "blur(2px)",
-        display: "grid",
-        placeItems: "center",
-        zIndex: 1000,
-      }}
-    >
-      <div
-        className="panel"
-        style={{
-          width: "min(720px, 92vw)",
-          maxHeight: "86vh",
-          overflow: "auto",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: 16,
-            borderBottom: "1px solid var(--border)",
-          }}
-        >
+    <div className={styles.overlay}>
+      <div className={`panel ${styles.modal}`}>
+        <div className={styles.header}>
           <strong>{title}</strong>
           <button className="ghost" onClick={onClose} aria-label="Close">
             ✕
           </button>
         </div>
-        <div style={{ padding: 16 }}>{children}</div>
+        <div className={styles.content}>{children}</div>
         {footer ? (
-          <div
-            style={{
-              padding: 12,
-              borderTop: "1px solid var(--border)",
-              display: "flex",
-              gap: 8,
-              justifyContent: "flex-end",
-            }}
-          >
+          <div className={styles.footer}>
             {footer}
           </div>
         ) : null}
