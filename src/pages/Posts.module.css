@@ -90,9 +90,6 @@
   font-weight: 500;
 }
 
-.formInput {
-  background-color: var(--panel-hover);
-}
 
 .skeleton {
   background: linear-gradient(
@@ -246,40 +243,6 @@
   color: var(--text-muted);
 }
 
-.form {
-  display: grid;
-  gap: 16px;
-}
-
-.formField {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem 1rem;
-  gap: 4px;
-}
-
-.formField label {
-  color: var(--text);
-  font-weight: 500;
-  font-size: 0.7rem;
-}
-
-.formField textarea {
-  padding: 0.5rem 1rem;
-  background: var(--panel-hover);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 0.825rem;
-  resize: vertical;
-  min-height: 120px;
-}
-
-.formField textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
-}
 
 .tableContainer {
   overflow-x: auto;

@@ -7,7 +7,7 @@ const data = [
   { id: "Referral", value: Math.round(5 + Math.random() * 15) },
 ];
 
-export default function NivoPieDemo() {
+export default function NivoPie() {
   return (
     <div style={{ height: "75%" }}>
       <ResponsivePie

@@ -11,7 +11,7 @@ const data = [
   },
 ];
 
-export default function NivoLineDemo() {
+export default function NivoLine() {
   return (
     <div style={{ height: "80%" }}>
       <ResponsiveLine

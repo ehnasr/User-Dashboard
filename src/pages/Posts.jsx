@@ -350,11 +350,11 @@ export default function Posts() {
           </>
         }
       >
-        <form id="post-form" onSubmit={onSubmit} className={styles.form}>
-          <div className={styles.formField}>
+        <form id="post-form" onSubmit={onSubmit} className="form">
+          <div className="formField">
             <Input
               label="Title"
-              className={styles.formInput}
+              className="formInput"
               value={form.title}
               onChange={(e) =>
                 setForm((f) => ({ ...f, title: e.target.value }))
@@ -362,7 +362,7 @@ export default function Posts() {
               required
             />
           </div>
-          <div className={styles.formField}>
+          <div className="formField">
             <label>Body</label>
             <textarea
               rows={6}

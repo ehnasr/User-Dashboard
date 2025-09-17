@@ -1,8 +1,8 @@
 import { usePosts } from "../hooks/usePosts.js";
-import NivoLineDemo from "../components/Charts/NivoLineDemo.jsx";
-import NivoBarDemo from "../components/Charts/NivoBarDemo.jsx";
-import NivoPieDemo from "../components/Charts/NivoPieDemo.jsx";
-import NivoGeoDemo from "../components/Charts/NivoGeoDemo.jsx";
+import NivoLine from "../components/Charts/NivoLine.jsx";
+import NivoBar from "../components/Charts/NivoBar.jsx";
+import NivoPie from "../components/Charts/NivoPie.jsx";
+import NivoGeo from "../components/Charts/NivoGeo.jsx";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
@@ -26,8 +26,8 @@ export default function Dashboard() {
             value: total.toLocaleString(),
             delta: "+14%",
           },
-          { label: "Sales Obtained", value: "431,225", delta: "+21%" },
-          { label: "New Clients", value: "32,441", delta: "+5%" },
+          { label: "Sales Obtained", value: "4,225", delta: "+21%" },
+          { label: "New Clients", value: "441", delta: "+5%" },
           { label: "Traffic Received", value: "1,325,134", delta: "+43%" },
         ].map((kpi) => (
           <div key={kpi.label} className={`panel ${styles.panelPadding}`}>
@@ -45,8 +45,13 @@ export default function Dashboard() {
       <div className={`grid main-split ${styles.section}`}>
         <div className={`panel ${styles.panelTall}`}>
           <strong>Revenue Generated</strong>
-          <div className={styles.revenueValue}>$59,342.32</div>
-          <NivoLineDemo />
+          <div className={styles.revenueValue}>
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(10000 + Math.random() * 40000)}
+          </div>
+          <NivoLine />
         </div>
         <div className={`panel ${styles.panelTallScroll}`}>
           <strong>Recent Posts</strong>
@@ -73,15 +78,15 @@ export default function Dashboard() {
       <div className={`grid widgets-3 ${styles.section}`}>
         <div className={`panel ${styles.panelMedium}`}>
           <strong>Campaign</strong>
-          <NivoPieDemo />
+          <NivoPie />
         </div>
         <div className={`panel ${styles.panelMedium}`}>
           <strong>Sales Quantity</strong>
-          <NivoBarDemo />
+          <NivoBar />
         </div>
         <div className={`panel ${styles.panelMedium}`}>
           <strong>Geography Based Traffic</strong>
-          <NivoGeoDemo />
+          <NivoGeo />
         </div>
       </div>
     </div>

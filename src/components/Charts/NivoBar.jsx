@@ -5,7 +5,7 @@ const data = Array.from({ length: 4 }).map((_, i) => ({
   sales: Math.round(100 + Math.random() * 200),
 }));
 
-export default function NivoBarDemo() {
+export default function NivoBar() {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <ResponsiveBar

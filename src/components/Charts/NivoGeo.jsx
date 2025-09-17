@@ -6,7 +6,7 @@ const data = geoFeatures.features.map((f, index) => ({
   value: Math.round(Math.random() * 1000),
 }));
 
-export default function NivoGeoDemo() {
+export default function NivoGeo() {
   return (
     <div style={{ width: "100%", height: 220 }}>
       <ResponsiveChoropleth
@@ -16,7 +16,7 @@ export default function NivoGeoDemo() {
         colors="nivo"
         domain={[0, 1000]}
         label="properties.name"
-        valueFormat="," 
+        valueFormat=","
         tooltip={({ feature, value }) => (
           <div style={{ padding: 6 }}>
             <div style={{ fontWeight: 700 }}>{feature?.properties?.name}</div>

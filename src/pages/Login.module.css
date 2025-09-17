@@ -1,0 +1,68 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 1rem;
+}
+
+.card {
+  max-width: 400px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.submitButton {
+  width: auto;
+  margin: 0.5rem auto 0;
+  padding: 0.5rem 2rem;
+  font-size: 0.875rem;
+  display: block;
+}
+
+.demoCredentials {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--panel-elevated);
+  font-size: 0.7rem;
+  border: 1px dashed var(--warning);
+  color: var(--warning);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.demoText {
+  flex: 1;
+}
+
+.fillButton {
+  background-color: transparent;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fillButton:hover {
+  background: var(--warning);
+  border: var(--warning);
+  color: var(--panel);
+}

@@ -10,9 +10,15 @@ export default function Modal({ open, title, children, onClose, footer }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose?.();
+    }
+  };
+
   if (!open) return null;
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={`panel ${styles.modal}`}>
         <div className={styles.header}>
           <strong>{title}</strong>
