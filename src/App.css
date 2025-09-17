@@ -115,7 +115,7 @@
   position: absolute;
   width: max(20vw, 260px);
   height: 100%;
-  background: url(../public/decorative-plant.png);
+  background: url(../decorative-plant.png);
   background-position: bottom;
   background-size: contain;
   background-repeat: no-repeat;
