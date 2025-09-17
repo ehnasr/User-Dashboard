@@ -30,9 +30,8 @@ export default function App() {
       <ThemeProvider>
         <NotificationProvider>
           <BrowserRouter>
-            {/* idle prefetch for common routes */}
             <PrefetchOnIdle />
-            <Suspense fallback={<RouteSpinner /> }>
+            <Suspense fallback={<RouteSpinner />}>
               <Routes>
                 <Route element={<AppLayout />}>
                   <Route path="/" element={<Dashboard />} />
@@ -144,16 +143,13 @@ function AppLayout() {
   return (
     <div className={shellClass}>
       <Sidebar />
-      <Topbar
-        sidebar={shellClass}
-        onToggleSidebar={handleToggleSidebar}
-      />
+      <Topbar sidebar={shellClass} onToggleSidebar={handleToggleSidebar} />
       <div className="sidebar-backdrop" onClick={handleCloseSidebar} />
       <main className="main">
         {sidebarTransitioning ? (
           <RouteSpinner />
         ) : (
-          <Suspense fallback={<RouteSpinner /> }>
+          <Suspense fallback={<RouteSpinner />}>
             <Outlet />
           </Suspense>
         )}

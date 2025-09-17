@@ -10,10 +10,10 @@ export default function NotificationContainer() {
         <div
           key={notification.id}
           className={`${styles.notification} ${styles[notification.type]} ${
-            notification.slideOut ? styles['slide-out'] : ''
+            notification.slideOut ? styles["slide-out"] : ""
           }`}
           style={{
-            '--countdown-duration': `${notification.duration}ms`
+            "--countdown-duration": `${notification.duration}ms`,
           }}
         >
           <div style={{ flex: 1 }}>{notification.message}</div>
