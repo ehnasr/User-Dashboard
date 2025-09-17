@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../components/UI/Button.jsx";
 import { usePosts } from "../hooks/usePosts.js";
 import { api } from "../services/api.js";
@@ -28,6 +28,13 @@ export default function Posts() {
     allData,
   } = usePosts({ query, page, pageSize });
   const { success, error: showError, warning, info } = useNotification();
+
+  // Notify on fetch errors
+  useEffect(() => {
+    if (error) {
+      showError(`Failed to fetch posts: ${error.message}`);
+    }
+  }, [error, showError]);
 
   const nextLocalId =
     allData.length > 0 ? Math.max(...allData.map((item) => item.id)) + 1 : 1;
@@ -203,14 +210,10 @@ export default function Posts() {
           <div className={`${styles.skeleton} ${styles.skeletonItem}`} />
           <div className={`${styles.skeleton} ${styles.skeletonItem}`} />
         </div>
-      ) : error ? (
-        <div className={`panel ${styles.errorPanel}`}>
-          Error: {error.message}
-        </div>
       ) : (
         <div className={styles.slideUp}>
           <div className={styles.tableContainer}>
-            <Table columns={columns} data={items} />
+            <Table columns={columns} data={error ? [] : items} empty="No data" />
           </div>
         </div>
       )}

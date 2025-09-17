@@ -6,7 +6,7 @@ import NivoGeo from "../components/Charts/NivoGeo.jsx";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
-  const { total, getRecentPosts } = usePosts({
+  const { total, getRecentPosts, error } = usePosts({
     query: "",
     page: 1,
     pageSize: 10,
@@ -56,21 +56,27 @@ export default function Dashboard() {
         <div className={`panel ${styles.panelTallScroll}`}>
           <strong>Recent Posts</strong>
           <div className={styles.postsList}>
-            {recentPosts.map((post) => (
-              <div key={post.id} className={styles.postItem}>
-                <div className={styles.postContent}>
-                  <div className={styles.postTitle} title={post.title}>
-                    {post.title}
+            {error ? (
+              <div className={styles.empty}>No data</div>
+            ) : recentPosts.length === 0 ? (
+              <div className={styles.empty}>No data</div>
+            ) : (
+              recentPosts.map((post) => (
+                <div key={post.id} className={styles.postItem}>
+                  <div className={styles.postContent}>
+                    <div className={styles.postTitle} title={post.title}>
+                      {post.title}
+                    </div>
+                    <div className={styles.postBody} title={post.body}>
+                      {post.body}
+                    </div>
                   </div>
-                  <div className={styles.postBody} title={post.body}>
-                    {post.body}
+                  <div className={`badge ${styles.badgePrimaryOutline}`}>
+                    ID: {post.id}
                   </div>
                 </div>
-                <div className={`badge ${styles.badgePrimaryOutline}`}>
-                  ID: {post.id}
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
