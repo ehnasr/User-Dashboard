@@ -8,6 +8,7 @@ import Modal from "../components/UI/Modal.jsx";
 import EditPostIcon from "../components/icons/EditPostIcon.jsx";
 import DeletePostIcon from "../components/icons/DeletePostIcon.jsx";
 import PlusIcon from "../components/icons/PlusIcon.jsx";
+import { useNotification } from "../context/NotificationContext.jsx";
 import styles from "./Posts.module.css";
 
 export default function Posts() {
@@ -26,14 +27,10 @@ export default function Posts() {
     removePost,
     allData,
   } = usePosts({ query, page, pageSize });
+  const { success, error: showError, warning, info } = useNotification();
 
   const nextLocalId =
     allData.length > 0 ? Math.max(...allData.map((item) => item.id)) + 1 : 1;
-
-  // Mock notification function
-  const push = (notification) => {
-    console.log(notification);
-  };
 
   const highlightText = (text, searchTerm) => {
     if (!searchTerm || !text) return text;
@@ -119,14 +116,14 @@ export default function Posts() {
     try {
       if (row.isLocal) {
         removePost(row.id);
-        push({ type: "success", message: "Deleted locally" });
+        success("Post deleted successfully");
       } else {
         await api.deletePost(row.id);
         removePost(row.id);
-        push({ type: "success", message: "Deleted" });
+        success("Post deleted successfully");
       }
     } catch (e) {
-      push({ type: "error", message: e.message });
+      showError(`Failed to delete post: ${e.message}`);
     }
   }
 
@@ -136,11 +133,11 @@ export default function Posts() {
       if (editing) {
         if (editing.isLocal) {
           updatePost(editing.id, form);
-          push({ type: "success", message: "Updated locally" });
+          success("Post updated successfully");
         } else {
           await api.updatePost(editing.id, form);
           updatePost(editing.id, form);
-          push({ type: "success", message: "Updated" });
+          success("Post updated successfully");
         }
       } else {
         const local = {
@@ -149,12 +146,12 @@ export default function Posts() {
           isLocal: true,
         };
         addPost(local);
-        push({ type: "success", message: "Created locally" });
+        success("Post created successfully");
       }
       setEditing(undefined);
       setForm({ title: "", body: "" });
     } catch (e) {
-      push({ type: "error", message: e.message });
+      showError(`Failed to save post: ${e.message}`);
     }
   }
 

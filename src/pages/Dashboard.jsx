@@ -54,10 +54,10 @@ export default function Dashboard() {
             {recentPosts.map((post) => (
               <div key={post.id} className={styles.postItem}>
                 <div className={styles.postContent}>
-                  <div className={styles.postTitle}>
+                  <div className={styles.postTitle} title={post.title}>
                     {post.title}
                   </div>
-                  <div className={styles.postBody}>
+                  <div className={styles.postBody} title={post.body}>
                     {post.body}
                   </div>
                 </div>

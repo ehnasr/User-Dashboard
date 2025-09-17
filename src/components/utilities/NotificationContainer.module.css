@@ -1,0 +1,103 @@
+.container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 5;
+}
+
+.notification {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 300px;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.notification::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--text-muted);
+  animation: countdown linear;
+  animation-duration: var(--countdown-duration, 5000ms);
+  animation-fill-mode: forwards;
+}
+
+@keyframes countdown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+    max-height: 100px;
+    margin-bottom: 0.5rem;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+  }
+}
+
+.notification.slide-out {
+  animation: slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification.success {
+  border-left: 4px solid var(--success);
+}
+
+.notification.success::after {
+  background: var(--success);
+}
+
+.notification.error {
+  border-left: 4px solid var(--danger);
+}
+
+.notification.error::after {
+  background: var(--danger);
+}
+
+.notification.warning {
+  border-left: 4px solid var(--warning);
+}
+
+.notification.warning::after {
+  background: var(--warning);
+}
+
+.notification.info {
+  border-left: 4px solid var(--primary);
+}
+
+.notification.info::after {
+  background: var(--primary);
+}
