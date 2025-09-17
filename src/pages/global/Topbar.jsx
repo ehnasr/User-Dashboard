@@ -5,11 +5,13 @@ import { useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { preloadDashboard, preloadPosts, preloadAbout } from "../../App.jsx";
 import { lazy, Suspense } from "react";
-const SidebarIcon = lazy(() => import("../../components/icons/SidebarIcon.jsx"));
+const SidebarIcon = lazy(() =>
+  import("../../components/icons/SidebarIcon.jsx")
+);
 const MoonIcon = lazy(() => import("../../components/icons/MoonIcon.jsx"));
 const SunIcon = lazy(() => import("../../components/icons/SunIcon.jsx"));
-import "../../App.css";
 import LogoutIcon from "../../components/icons/LogoutIcon.jsx";
+import "../../App.css";
 
 export default function Topbar({ onToggleSidebar, sidebar }) {
   const { theme, toggle } = useTheme();
@@ -38,7 +40,6 @@ export default function Topbar({ onToggleSidebar, sidebar }) {
   }, []);
 
   const handleSearchFocus = useCallback(() => {
-    // warm up route chunks on focus for snappier nav
     routes.forEach((r) => r.preload?.());
   }, [routes]);
 
@@ -70,13 +71,13 @@ export default function Topbar({ onToggleSidebar, sidebar }) {
           aria-label="Toggle sidebar"
           title="Toggle sidebar"
         >
-          <Suspense fallback={<span className="icon" aria-hidden />}> 
+          <Suspense fallback={<span className="icon" aria-hidden />}>
             <SidebarIcon deg={sidebar.includes("collapsed") ? "0" : "180"} />
           </Suspense>
         </button>
         <input
           className="top-search"
-          placeholder="Search routes... (e.g., Posts)"
+          placeholder="Search ..."
           value={query}
           onChange={handleSearchChange}
           onKeyDown={handleSearchKeyDown}
@@ -96,7 +97,7 @@ export default function Topbar({ onToggleSidebar, sidebar }) {
           aria-label={theme}
           title={theme === "dark" ? "Light" : "Dark"}
         >
-          <Suspense fallback={<span className="icon" aria-hidden />}> 
+          <Suspense fallback={<span className="icon" aria-hidden />}>
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </Suspense>
         </button>
