@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, memo, useCallback } from "react";
 import styles from "./Modal.module.css";
 
-export default function Modal({ open, title, children, onClose, footer }) {
+function Modal({ open, title, children, onClose, footer }) {
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") onClose?.();
@@ -10,11 +10,11 @@ export default function Modal({ open, title, children, onClose, footer }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  const handleOverlayClick = (e) => {
+  const handleOverlayClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       onClose?.();
     }
-  };
+  }, [onClose]);
 
   if (!open) return null;
   return (
@@ -36,3 +36,5 @@ export default function Modal({ open, title, children, onClose, footer }) {
     </div>
   );
 }
+
+export default memo(Modal);

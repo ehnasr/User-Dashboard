@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { ResponsivePie } from "@nivo/pie";
 
 const data = [
@@ -7,11 +8,12 @@ const data = [
   { id: "Referral", value: Math.round(5 + Math.random() * 15) },
 ];
 
-export default function NivoPie() {
+function NivoPie() {
+  const chartData = useMemo(() => data, []);
   return (
     <div style={{ height: "75%" }}>
       <ResponsivePie
-        data={data}
+        data={chartData}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         padding={0.5}
         innerRadius={0.5}
@@ -33,3 +35,5 @@ export default function NivoPie() {
     </div>
   );
 }
+
+export default memo(NivoPie);

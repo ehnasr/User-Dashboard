@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const data = Array.from({ length: 4 }).map((_, i) => ({
@@ -5,11 +6,12 @@ const data = Array.from({ length: 4 }).map((_, i) => ({
   sales: Math.round(100 + Math.random() * 200),
 }));
 
-export default function NivoBar() {
+function NivoBar() {
+  const chartData = useMemo(() => data, []);
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <ResponsiveBar
-        data={data}
+        data={chartData}
         keys={["sales"]}
         indexBy="label"
         margin={{ top: 20, right: 10, bottom: 40, left: 30 }}
@@ -31,3 +33,5 @@ export default function NivoBar() {
     </div>
   );
 }
+
+export default memo(NivoBar);

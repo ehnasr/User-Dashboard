@@ -1,38 +1,41 @@
+import { memo, useMemo } from "react";
 import styles from "./Table.module.css";
 
-export default function Table({
+function Table({
   columns,
   data,
   rowKey = (row) => row.id,
   empty = "No data",
 }) {
+  const resolvedColumns = useMemo(() => columns, [columns]);
+  const resolvedData = useMemo(() => data, [data]);
   return (
     <div className={`panel ${styles.tableContainer}`}>
       <div className={styles.tableWrapper}>
         <table className="table">
           <thead>
             <tr>
-              {columns.map((col) => (
+              {resolvedColumns.map((col) => (
                 <th key={col.key || col.accessor}>{col.header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data.length === 0 ? (
+            {resolvedData.length === 0 ? (
               <tr>
                 <td
-                  colSpan={columns.length}
+                  colSpan={resolvedColumns.length}
                   className={styles.emptyCell}
                 >
                   {empty}
                 </td>
               </tr>
             ) : (
-              data.map((row) => (
+              resolvedData.map((row) => (
                 <tr
                   key={typeof rowKey === "function" ? rowKey(row) : row[rowKey]}
                 >
-                  {columns.map((col) => (
+                  {resolvedColumns.map((col) => (
                     <td key={col.key || col.accessor}>
                       {col.render ? col.render(row) : row[col.accessor]}
                     </td>
@@ -46,3 +49,5 @@ export default function Table({
     </div>
   );
 }
+
+export default memo(Table);

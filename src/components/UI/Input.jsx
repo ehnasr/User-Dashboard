@@ -1,6 +1,7 @@
+import { memo } from "react";
 import styles from "./Input.module.css";
 
-export default function Input({ label, error, hint, ...rest }) {
+function Input({ label, error, hint, ...rest }) {
   return (
     <div className={styles.formField}>
       {label ? <label>{label}</label> : null}
@@ -15,3 +16,5 @@ export default function Input({ label, error, hint, ...rest }) {
     </div>
   );
 }
+
+export default memo(Input);

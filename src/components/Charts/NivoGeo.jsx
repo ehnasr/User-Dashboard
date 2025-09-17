@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import geoFeatures from "./world_countries.js";
 
@@ -6,11 +7,12 @@ const data = geoFeatures.features.map((f, index) => ({
   value: Math.round(Math.random() * 1000),
 }));
 
-export default function NivoGeo() {
+function NivoGeo() {
+  const chartData = useMemo(() => data, []);
   return (
     <div style={{ width: "100%", height: 220 }}>
       <ResponsiveChoropleth
-        data={data}
+        data={chartData}
         features={geoFeatures.features}
         margin={{ top: 30, right: 10, bottom: 10, left: 10 }}
         colors="nivo"
@@ -45,3 +47,5 @@ export default function NivoGeo() {
     </div>
   );
 }
+
+export default memo(NivoGeo);

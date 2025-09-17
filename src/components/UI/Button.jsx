@@ -1,4 +1,6 @@
-export default function Button({ children, variant = "default", ...rest }) {
+import { memo } from "react";
+
+function Button({ children, variant = "default", ...rest }) {
   const className = [
     "btn",
     variant === "primary" ? "primary" : "",
@@ -13,3 +15,5 @@ export default function Button({ children, variant = "default", ...rest }) {
     </button>
   );
 }
+
+export default memo(Button);

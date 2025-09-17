@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
 
 const data = [
@@ -11,11 +12,12 @@ const data = [
   },
 ];
 
-export default function NivoLine() {
+function NivoLine() {
+  const chartData = useMemo(() => data, []);
   return (
     <div style={{ height: "80%" }}>
       <ResponsiveLine
-        data={data}
+        data={chartData}
         margin={{ top: 20, right: 10, bottom: 30, left: 30 }}
         xScale={{ type: "point" }}
         yScale={{ type: "linear", min: 0, max: 100, stacked: false }}
@@ -44,3 +46,5 @@ export default function NivoLine() {
     </div>
   );
 }
+
+export default memo(NivoLine);

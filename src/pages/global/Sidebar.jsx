@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
 import Time from "../../components/utilities/Time.jsx";
-import ArrowRightIcon from "../../components/icons/ArrowRightIcon.jsx";
-import ClockIcon from "../../components/icons/ClockIcon.jsx";
-import HomeIcon from "../../components/icons/HomeIcon.jsx";
-import NoteIcon from "../../components/icons/NoteIcon.jsx";
-import InfoIcon from "../../components/icons/InfoIcon.jsx";
+import { lazy, Suspense } from "react";
+const ArrowRightIcon = lazy(() => import("../../components/icons/ArrowRightIcon.jsx"));
+const ClockIcon = lazy(() => import("../../components/icons/ClockIcon.jsx"));
+const HomeIcon = lazy(() => import("../../components/icons/HomeIcon.jsx"));
+const NoteIcon = lazy(() => import("../../components/icons/NoteIcon.jsx"));
+const InfoIcon = lazy(() => import("../../components/icons/InfoIcon.jsx"));
 import "../../App.css";
 
 export default function Sidebar() {
@@ -12,7 +13,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       <div className="profile-card">
         <div className="avatar" aria-hidden>
-          <img src="https://i.pravatar.cc/100?img=12" alt="user avatar" />
+          <img src="https://i.pravatar.cc/100?img=12" alt="user avatar" loading="lazy" />
         </div>
         <div className="profile-meta">
           <div className="profile-name">Ehab Nasr</div>
@@ -30,9 +31,13 @@ export default function Sidebar() {
           title="Dashboard"
           aria-label="Dashboard"
         >
-          <HomeIcon className="home-icon icon" />
+          <Suspense fallback={<span className="icon" aria-hidden />}> 
+            <HomeIcon className="home-icon icon" />
+          </Suspense>
           <span>Dashboard</span>
-          <ArrowRightIcon className="arrow-right-icon icon" />
+          <Suspense fallback={<span className="icon" aria-hidden />}>
+            <ArrowRightIcon className="arrow-right-icon icon" />
+          </Suspense>
         </NavLink>
         <NavLink
           to="/posts"
@@ -41,9 +46,13 @@ export default function Sidebar() {
           title="Posts"
           aria-label="Posts"
         >
-          <NoteIcon className="note-icon icon" />
+          <Suspense fallback={<span className="icon" aria-hidden />}> 
+            <NoteIcon className="note-icon icon" />
+          </Suspense>
           <span>Posts</span>
-          <ArrowRightIcon className="arrow-right-icon icon" />
+          <Suspense fallback={<span className="icon" aria-hidden />}> 
+            <ArrowRightIcon className="arrow-right-icon icon" />
+          </Suspense>
         </NavLink>
         <NavLink
           to="/about"
@@ -52,13 +61,19 @@ export default function Sidebar() {
           title="About"
           aria-label="About"
         >
-          <InfoIcon className="info-icon icon" />
+          <Suspense fallback={<span className="icon" aria-hidden />}> 
+            <InfoIcon className="info-icon icon" />
+          </Suspense>
           <span>About</span>
-          <ArrowRightIcon className="arrow-right-icon icon" />
+          <Suspense fallback={<span className="icon" aria-hidden />}> 
+            <ArrowRightIcon className="arrow-right-icon icon" />
+          </Suspense>
         </NavLink>
       </nav>
       <div className="sidebar-footer">
-        <ClockIcon className="clock-icon icon" color={"var(--panel)"} />
+        <Suspense fallback={<span className="icon" aria-hidden />}> 
+          <ClockIcon className="clock-icon icon" color={"var(--panel)"} />
+        </Suspense>
         <Time />
       </div>
     </aside>

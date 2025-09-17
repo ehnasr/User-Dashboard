@@ -1,4 +1,6 @@
-export default function HomeIcon(props) {
+import { memo } from "react";
+
+function HomeIcon(props) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -18,3 +20,5 @@ export default function HomeIcon(props) {
     </svg>
   );
 }
+
+export default memo(HomeIcon);
